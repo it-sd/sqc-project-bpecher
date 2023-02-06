@@ -13,8 +13,7 @@ Web Services
 
 [QWeather](https://dev.qweather.com/en/) APIKey
 
-1. [Get 3 day forecast](https://api.qweather.com/v7/weather/3d?[params])
-2. [Get 10 day forecast](https://api.qweather.com/v7/weather/7d?[params])
+1. [Get 3 day forecast](https://dev.qweather.com/en/docs/api/weather/weather-daily-forecast/#request-url)
 
 [Recreation Information Database](https://ridb.recreation.gov/landing) APIKey
 
