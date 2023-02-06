@@ -6,16 +6,21 @@ I want to create a travel planning website. I'd like to include the weather at b
 Web Services
 ------------
 [Google Calendar](https://developers.google.com/calendar) OAuth2.0
-*[Get](https://developers.google.com/calendar/api/v3/reference/events/get)
-*[Insert](https://developers.google.com/calendar/api/v3/reference/events/insert)
-*[Update](https://developers.google.com/calendar/api/v3/reference/events/update)
+
+1. [Get](https://developers.google.com/calendar/api/v3/reference/events/get)
+2.  [Insert](https://developers.google.com/calendar/api/v3/reference/events/insert)
+3. [Update](https://developers.google.com/calendar/api/v3/reference/events/update)
+
 [QWeather](https://dev.qweather.com/en/) APIKey
-*[Get 3 day forecast](https://api.qweather.com/v7/weather/3d?[params])
-*[Get 10 day forecast](https://api.qweather.com/v7/weather/7d?[params])
+
+1. [Get 3 day forecast](https://api.qweather.com/v7/weather/3d?[params])
+2. [Get 10 day forecast](https://api.qweather.com/v7/weather/7d?[params])
+
 [Recreation Information Database](https://ridb.recreation.gov/landing) APIKey
-*[Get/events](https://ridb.recreation.gov/docs#/Activities/getActivities)
-*[Get/Activities](https://ridb.recreation.gov/docs#/Events/getEvents)
-*[GET/facilities](https://ridb.recreation.gov/docs#/Facilities/getFacilities)
+
+1. [Get/events](https://ridb.recreation.gov/docs#/Activities/getActivities)
+2. [Get/Activities](https://ridb.recreation.gov/docs#/Events/getEvents)
+3. [GET/facilities](https://ridb.recreation.gov/docs#/Facilities/getFacilities)
 
 Datase Use
 ----------
@@ -25,5 +30,5 @@ I plan to have an events table to store planned activities like biking, kayaking
 Initial Designs
 ---------------
 
-![Site Map](./docs/2-cafe-wall.svg)(./docs/Sample_Page_Layout.JPG)
-![Sample Page Layout](./docs/2-cafe-wall.svg)(./docs/Site_Map.JPG)
+![Site Map](./Sample_Page_Layout.JPG)
+![Sample Page Layout](./Site_Map.JPG)
