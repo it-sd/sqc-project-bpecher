@@ -1,0 +1,30 @@
+* {
+  font-size: 16pt;
+  font-family: "Iowan Old Style", "Hoefler Text", serif;
+  font-kerning: normal;
+}
+
+body {
+  color: #005;
+  background-color: #fefefe;
+  line-height: 1.2;
+}
+
+label {
+  display: inline-block;
+  text-align: right;
+  padding: 0 0.5em;
+  width: 10%;
+}
+
+input {
+  display: inline-block;
+  vertical-align: middle;
+  width: 70%;
+}
+
+main {
+  background-color: #eee;
+  margin: 3em auto;
+  width: 50%;
+}
