@@ -18,6 +18,18 @@ app.use(express.urlencoded({ extended: true }))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
+const request = require('supertest')
+
+describe('app', () => {
+  describe('GET /health', () => {
+    it('responds with a status code between 200 and 399', async () => {
+      const response = await request(app).get('/health')
+      expect(response.status).toBeGreaterThanOrEqual(200)
+      expect(response.status).toBeLessThanOrEqual(399)
+    })
+  })
+})
+
 app.get('/', (req, res) => {
   res.render('pages/index')
 })
@@ -33,18 +45,6 @@ app.get('/health', async (req, res) => {
   } catch (err) {
     res.status(500).send('Unable to connect to database')
   }
-})
-
-const request = require('supertest')
-
-describe('app', () => {
-  describe('GET /health', () => {
-    it('responds with a status code between 200 and 399', async () => {
-      const response = await request(app).get('/health')
-      expect(response.status).toBeGreaterThanOrEqual(200)
-      expect(response.status).toBeLessThanOrEqual(399)
-    })
-  })
 })
 
 app.get('/trips', function (req, res) {
