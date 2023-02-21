@@ -1,0 +1,31 @@
+<!-- trips.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>All Trips</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <h1>All Trips</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Trip ID</th>
+          <th>Origin</th>
+          <th>Destination</th>
+          <th>Departure Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% trips.forEach(function(trip) { %>
+          <tr>
+            <td><%= trip.id %></td>
+            <td><%= trip.origin %></td>
+            <td><%= trip.destination %></td>
+            <td><%= trip.departure_time %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+  </body>
+</html>
