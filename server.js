@@ -41,7 +41,7 @@ app.get('/trips', function (req, res) {
       console.error(err)
       res.status(500).send('Error retrieving trips')
     } else {
-      res.render('trips', { trips: result.rows })
+      res.render('pages/trips', { trips: result.rows })
     }
   })
 })

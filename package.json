@@ -1,7 +1,7 @@
 {
   "name": "sqc-project-bpecher",
   "version": "1.0.0",
-  "description": "Your name or CVTC username",
+  "description": "Brandon Pecher (bpecher)",
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
