@@ -46,6 +46,22 @@ app.get('/trips', function (req, res) {
   })
 })
 
+app.post('/trips', (req, res) => {
+  const { departure_date, arrival_date } = req.body
+
+  // Insert data into the database
+  const query = 'INSERT INTO trips(departure_date, arrival_date) VALUES ($1, $2)'
+  const values = [departure_date, arrival_date]
+
+  pool.query(query, values, (error, result) => {
+    if (error) {
+      res.status(500).send({ error: 'Error inserting data into database' })
+    } else {
+      res.send({ success: true })
+    }
+  })
+})
+
 app.listen(port, () => {
   console.log(`App listening at port ${port}`)
 })

@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link type="text/css" href="../../public/site.css">
+    <link type="text/css" href="/site.css">
   </head>
   <body id="body">
     <h1>All Trips</h1>
@@ -33,5 +33,36 @@
         <% }); %>
       </tbody>
     </table>
+    <script>
+const start_date = '2023-03-01';
+const end_date = '2023-03-15';
+
+fetch('/trips', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ departure_date, arrival_date })
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+const feedbackElement = document.getElementById('feedback');
+
+fetch('/trips', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ departure_date, arrival_date })
+})
+  .then(response => {
+    if (response.ok) {
+      feedbackElement.textContent = 'Trip data saved successfully.';
+    } else {
+      feedbackElement.textContent = 'Error saving trip data.';
+    }
+  })
+  .catch(error => {
+    feedbackElement.textContent = 'Error saving trip data.';
+    console.error(error);
+  });
+    </script>
   </body>
 </html>
