@@ -7,7 +7,70 @@
 body {
   color: #005;
   background-color: #fefefe;
-  line-height: 1.2;
+  line-height: 2.0;
+  background-image: url("/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+header {
+  height: 200px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
+  width: 1090px;
+}
+
+h1{
+  text-align: center;
+  color: white;
+  font-size: 50px;
+}
+
+h2{
+  margin: 0em;
+  width: 100%;
+}
+
+nav {
+  margin: 10px auto;
+  width: 1090px;
+  
+}
+
+nav ul li a {
+  margin: 25px 125px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+nav ul a {
+  background-color: rgba(59, 244, 122, 0.8);
+  border-color: #FFF;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  font-family: Helvetica, sans-serif;
+  color: #FFF;
+  padding: 0 20px;
+  font-size: 125%;
+  display: block;
+    
+}
+
+nav ul a:hover {
+  background-color: rgba(59, 49, 235, 0.8);
+  border-color: rgba(19, 2, 75, 0.8);
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 5px;
+  color: #FFF;
 }
 
 label {
@@ -25,8 +88,10 @@ input {
 
 main {
   background-color: #eee;
-  margin: 3em auto;
-  width: 50%;
+  margin: 5em auto;
+  width: 100%;
+  text-align: center; 
+  border-radius: 10px;
 }
 
 table {
