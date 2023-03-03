@@ -8,7 +8,7 @@ body {
   color: #005;
   background-color: #fefefe;
   line-height: 2.0;
-  background-image: url("/background.jpg");
+  background-image: url("background.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
