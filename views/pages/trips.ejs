@@ -1,0 +1,57 @@
+<!-- trips.ejs -->
+<%- include('../shared/header.ejs') %>
+  <body id="body">
+    <h1>All Trips</h1>
+    <table>
+      <thead>
+        <tr>
+          <th>Trip ID</th>
+          <th>Origin</th>
+          <th>Destination</th>
+          <th>Departure Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% trips.forEach(function(trip) { %>
+          <tr>
+            <td><%= trip.id %></td>
+            <td><%= trip.origin %></td>
+            <td><%= trip.destination %></td>
+            <td><%= trip.departure_time %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <script>
+const start_date = '2023-03-01';
+const end_date = '2023-03-15';
+
+fetch('/trips', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ departure_date, arrival_date })
+})
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+const feedbackElement = document.getElementById('feedback');
+
+fetch('/trips', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ departure_date, arrival_date })
+})
+  .then(response => {
+    if (response.ok) {
+      feedbackElement.textContent = 'Trip data saved successfully.';
+    } else {
+      feedbackElement.textContent = 'Error saving trip data.';
+    }
+  })
+  .catch(error => {
+    feedbackElement.textContent = 'Error saving trip data.';
+    console.error(error);
+  });
+    </script>
+  </body>
+</html>
