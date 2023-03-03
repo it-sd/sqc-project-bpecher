@@ -15,3 +15,30 @@ I would also like to incorporate the heuristic of aesthetic and minimalist desig
 
 I feel like the following website explains, with very basic concepts, how I want to implement this design.
 [Minimalist Website Ideas](https://invigomedia.com/minimalistic-vs-busy-web-design/)
+
+Color Scheme & Typography
+=========================
+
+Color Scheme
+------------
+
+![Colors](Color_Scheme.jpg)
+
+RGB Values:
+#EF9932
+#F0EAAD
+#56F06D
+#3EB6F0
+#9E81F0
+
+I am choosing this color set as I want my website to be bright and vibrant. I am hoping this will bring a happy and relaxing feel to the website since travel planning a vacation or trip can be quite stressful. Pastel colors, psychologically, are supposed to be calming and peaceful. Three out of the five selections also happen to be my favorite colors. I enjoy orange, green, and blue.
+
+Typography
+----------
+
+Arial
+Courier New
+Brush Script
+
+
+I think I will end up using three fonts throughout my site. I plan to use Arial for headings and titles. Courier New will be used for most of my informational text on the site. Lastly, if I need some text to pop or stand out, I think I will use Brush Script. However, since Brush Script can be difficult to read, I will make sure it is used with larger font sizes. I plan to implement text hierarchy with a headline or title, subheads, and text. I plan to utilize font size for attention and highlighting important subjects or areas.
