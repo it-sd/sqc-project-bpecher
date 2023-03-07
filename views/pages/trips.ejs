@@ -5,19 +5,19 @@
     <table>
       <thead>
         <tr>
+          <th>Schedule ID</th>
           <th>Trip ID</th>
-          <th>Origin</th>
-          <th>Destination</th>
-          <th>Departure Time</th>
+          <th>Departure Date</th>
+          <th>Arrival Date</th>
         </tr>
       </thead>
       <tbody>
-        <% trips.forEach(function(trip) { %>
+        <% schedule.forEach(function(trip) { %>
           <tr>
-            <td><%= trip.id %></td>
-            <td><%= trip.origin %></td>
-            <td><%= trip.destination %></td>
-            <td><%= trip.departure_time %></td>
+            <td><%= trip.schedule_id %></td>
+            <td><%= trip.trip_id %></td>
+            <td><%= trip.departure_date %></td>
+            <td><%= trip.arrival_date %></td>
           </tr>
         <% }); %>
       </tbody>

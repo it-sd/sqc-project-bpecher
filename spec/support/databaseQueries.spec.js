@@ -1,10 +1,21 @@
 const { Pool } = require('pg')
-const pool = new Pool()
+const request = require('supertest')
+const express = require('express')
+const pool = new Pool({
+  user: 'postgres',
+  host: 'localhost',
+  database: 'postgres',
+  password: 'postgres',
+  port: 5432,
+  ssl: {
+    rejectUnauthorized: false
+  }
+})
 
 describe('database queries', () => {
   // Test getting a trip by ID
   it('get trip by ID', async () => {
-    const query = 'SELECT * FROM trip WHERE trip_id = $1'
+    const query = 'SELECT * FROM trips WHERE trip_id = $1'
     const values = [1]
     const res = await pool.query(query, values)
     expect(res.rows.length).toBe(1)

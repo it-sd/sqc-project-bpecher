@@ -105,14 +105,18 @@ th, td {
 }
 
 th {
-  background-color: #007bff;
-  color: white;
+  background-color: #3EB6F0;
+  color: black;
 }
 
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #F0EAAD;
+}
+
+tr:nth-child(odd) {
+  background-color: #EF9932;
 }
 
 tr:hover {
-  background-color: #ddd;
+  background-color: #9E81F0;
 }
