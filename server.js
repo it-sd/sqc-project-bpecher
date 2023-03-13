@@ -1,22 +1,20 @@
+require('dotenv').config()
 const { Pool } = require('pg')
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'postgres',
-  password: 'postgres',
-  port: 5432,
+  connectionString: process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false
   }
 })
 
+
 const express = require('express')
 const app = express()
 const path = require('path')
-const port = process.env.port || 3000
+const port = process.env.PORT || 3000
 
 const { google } = require('googleapis')
-
+console.log(process.env.DATABASE_URL)
 require('dotenv').config()
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
