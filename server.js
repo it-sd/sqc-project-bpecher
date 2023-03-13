@@ -13,7 +13,7 @@ const pool = new Pool({
 const express = require('express')
 const app = express()
 const path = require('path')
-const port = 3000
+const port = process.env.PORT || 3000
 
 const { google } = require('googleapis')
 
@@ -28,7 +28,7 @@ const oauth2Client = new google.auth.OAuth2(
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-app.set('views', path.join(__dirname, 'views\pages'))
+app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
 app.get('/', (req, res) => {
