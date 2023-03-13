@@ -19,12 +19,12 @@ require('dotenv').config()
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  'http://localhost:5432/oauthcallback'
+  'http://localhost:3000/oauthcallback'
 )
 
 describe('GET /health', function () {
   it('responds with a status code between 200 and 399', async function () {
-    const response = await fetch('http://localhost:5432/health')
+    const response = await fetch('http://localhost:3000/health')
     expect(response.status).toBeGreaterThanOrEqual(200)
     expect(response.status).toBeLessThanOrEqual(399)
   })
@@ -34,7 +34,7 @@ describe('GET /health', function () {
 describe('POST /trips', function () {
   it('should save trip data to the database', async function () {
     const tripData = { departure_date: '2023-03-01', arrival_date: '2023-03-15' }
-    const response = await fetch('http://localhost:5432', {method: 'POST', body: tripData})
+    const response = await fetch('http://localhost:3000', {method: 'POST', body: tripData})
       //.post('/trips')
       //.send(tripData)
       //.set('Accept', 'application/json')
