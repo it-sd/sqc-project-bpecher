@@ -13,7 +13,7 @@ const pool = new Pool({
 const express = require('express')
 const app = express()
 const path = require('path')
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 5432
 
 const { google } = require('googleapis')
 
@@ -21,7 +21,7 @@ require('dotenv').config()
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  'http://localhost:3000/oauthcallback'
+  'http://localhost:5432/oauthcallback'
 )
 
 
@@ -31,7 +31,7 @@ app.use(express.urlencoded({ extended: true }))
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => {
+app.get('/', function (req, res) {
   res.render('pages/index')
 })
 
