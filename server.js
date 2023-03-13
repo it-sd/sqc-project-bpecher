@@ -60,7 +60,6 @@ app.get('/trips', async (req, res) => {
 
 app.post('/trips', async (req, res) => {
   const { departure_date, arrival_date } = req.body
-  res.render('trips', { departure_date: departure_date })
 
   // Insert data into the database
   const query = 'INSERT INTO schedule(departure_date, arrival_date ) VALUES ($1, $2)'
@@ -68,6 +67,7 @@ app.post('/trips', async (req, res) => {
 
   try {
     const result = await pool.query(query, values)
+    res.render('trips', { departure_date: departure_date })
     res.send({ success: true })
   } catch (err) {
     res.status(500).send({ error: 'Error inserting data into database' })
