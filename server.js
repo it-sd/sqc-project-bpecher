@@ -35,7 +35,7 @@ app.get('/', (req, res) => {
   res.render('pages/index')
 })
 
-app.get('/about', async (req, res) => {
+app.get('/about', async function (req, res) {
   res.render('pages/about')
 })
 
@@ -48,7 +48,7 @@ app.get('/health', async function (req, res) {
   }
 })
 
-app.get('/trips', async (req, res) => {
+app.get('/trips', async function (req, res) {
   try {
     const result = await pool.query('SELECT * FROM schedule')
     res.render('pages/trips', { schedule: result.rows })
@@ -58,7 +58,7 @@ app.get('/trips', async (req, res) => {
   }
 })
 
-app.post('/trips', async (req, res) => {
+app.post('/trips', async function (req, res) {
   const { departure_date, arrival_date } = req.body
 
   // Insert data into the database
@@ -74,7 +74,7 @@ app.post('/trips', async (req, res) => {
   }
 })
 
-app.get('/auth', (req, res) => {
+app.get('/auth', function (req, res) {
   const authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: ['https://www.googleapis.com/auth/calendar'],
@@ -82,14 +82,14 @@ app.get('/auth', (req, res) => {
   res.redirect(authUrl)
 })
 
-app.get('/oauthcallback', async (req, res) => {
+app.get('/oauthcallback', async function (req, res) {
   const { code } = req.query
   const { tokens } = await oauth2Client.getToken(code)
   oauth2Client.setCredentials(tokens)
   res.redirect('/calendar')
 })
 
-app.get('/calendar', async (req, res) => {
+app.get('/calendar', async function (req, res) {
   try {
     const calendar = google.calendar({ version: 'v3', auth: oauth2Client })
     const { data } = await calendar.events.list({
@@ -107,6 +107,6 @@ app.get('/calendar', async (req, res) => {
   }
 })
 
-app.listen(port, () => {
+app.listen(port, function () {
   console.log(`App listening at port ${port}`)
 })

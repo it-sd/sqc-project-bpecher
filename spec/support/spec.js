@@ -34,7 +34,7 @@ describe('GET /health', function () {
 describe('POST /trips', function () {
   it('should save trip data to the database', async function () {
     const tripData = { departure_date: '2023-03-01', arrival_date: '2023-03-15' }
-    const response = await fetch('http://localhost:3000/trips', {method: 'POST', body: tripData})
+    const response = await fetch('http://localhost:3000', {method: 'POST', body: tripData})
       //.post('/trips')
       //.send(tripData)
       //.set('Accept', 'application/json')
@@ -77,19 +77,19 @@ describe('database queries', function () {
   })
 })
 describe('OAuth2', function () {
-  it('redirects the user to the Google Calendar authorization URL', async () => {
+  it('redirects the user to the Google Calendar authorization URL', async function () {
   const res = await request(app).get('/auth')
   expect(res.statusCode).toEqual(302)
   expect(res.header.location).toMatch(/^https:\/\/accounts\.google\.com\/o\/oauth2\/v2\/auth/)
   })
 
-  it('exchanges the authorization code for an access token and refresh token', async () => {
+  it('exchanges the authorization code for an access token and refresh token', async function () {
   const { tokens } = await oauth2Client.getToken()
   expect(tokens).toHaveProperty('access_token')
   expect(tokens).toHaveProperty('refresh_token')
   })
 
-  it('displays the user\'s Google Calendar events', async () => {
+  it('displays the user\'s Google Calendar events', async function () {
   const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
   const { data } = await calendar.events.list({
     calendarId: 'primary',
