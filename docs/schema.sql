@@ -4,11 +4,11 @@ DROP TABLE IF EXISTS trips;
 
 -- Create tables
 CREATE TABLE trips (
-  trip_id INTEGER PRIMARY KEY
+  trip_id SERIAL PRIMARY KEY
 );
 
 CREATE TABLE schedule (
-  schedule_id INTEGER PRIMARY KEY,
+  schedule_id SERIAL PRIMARY KEY,
   trip_id INTEGER,
   departure_date DATE,
   arrival_date DATE,
