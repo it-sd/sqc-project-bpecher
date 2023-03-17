@@ -11,9 +11,9 @@
       function initClient() {
         // Initialize the client with API key and necessary scopes
         gapi.client.init({
-          apiKey: 'AIzaSyDD3b_XG6YTsiaxq6_1fPsoEBNkMRHJadA',
+          apiKey: process.env.API_KEY,
           discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
-          clientId: '477636651699-16dt2kcspo1o8475fba46o0ef7ditts6.apps.googleusercontent.com',
+          clientId: process.env.CLIENT_ID,
           scope: 'https://www.googleapis.com/auth/calendar.readonly'
         }).then(function() {
           // Call the Google Calendar API to retrieve the events for the next 7 days
