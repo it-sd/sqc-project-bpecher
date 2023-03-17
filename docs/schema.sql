@@ -18,8 +18,7 @@ CREATE TABLE schedule (
 -- Insert default data into tables
 INSERT INTO trips (trip_id) VALUES (1);
 INSERT INTO trips (trip_id) VALUES (2);
-INSERT INTO trips (trip_id) VALUES (3);
 
 INSERT INTO schedule (schedule_id, trip_id, departure_date, arrival_date) VALUES (1, 1, '2023-03-01', '2023-03-05');
-INSERT INTO schedule (schedule_id, trip_id, departure_date, arrival_date) VALUES (2, 2, '2023-03-06', '2023-03-10');
-INSERT INTO schedule (schedule_id, trip_id, departure_date, arrival_date) VALUES (3, 3, '2023-04-01', '2023-04-05');
+INSERT INTO schedule (schedule_id, trip_id, departure_date, arrival_date) VALUES (2, 1, '2023-03-06', '2023-03-10');
+INSERT INTO schedule (schedule_id, trip_id, departure_date, arrival_date) VALUES (3, 2, '2023-04-01', '2023-04-05');
