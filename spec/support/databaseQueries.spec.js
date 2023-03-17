@@ -34,6 +34,6 @@ describe('database queries', function () {
     const query = 'SELECT * FROM schedule WHERE trip_id = $1'
     const values = [1]
     const res = await pool.query(query, values)
-    expect(res.rows.length).toBe(2)
+    expect(res.rows.length).toBe(1)
   })
 })

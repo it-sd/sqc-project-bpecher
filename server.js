@@ -13,8 +13,7 @@ const path = require('path')
 const port = process.env.PORT || 3000
 
 const { google } = require('googleapis')
-console.log(process.env.DATABASE_URL)
-require('dotenv').config()
+
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
@@ -51,6 +50,63 @@ app.get('/trips', async function (req, res) {
   } catch (err) {
     console.error(err)
     res.status(500).send('Error retrieving trips')
+  }
+})
+
+app.post('/trips/add', async function (req, res) {
+  const { schedule_id, trip_id, departure_date, arrival_date } = req.body
+  try {
+    // Check if a record with the same schedule_id and trip_id already exists in the database
+    const existingSchedule = await pool.query('SELECT * FROM schedule WHERE schedule_id = $1 AND trip_id = $2', [schedule_id, trip_id])
+    if (existingSchedule.rows.length > 0) {
+      res.status(400).send('Schedule ID and Trip ID already in use. Please use the back button in your browser.')
+      return
+    }
+
+    let newTripResult
+    let newTripId
+    // If trip_id is not already in use, insert it into the trips table
+    if (!trip_id) {
+      newTripResult = await pool.query('INSERT INTO trips DEFAULT VALUES RETURNING trip_id')
+      newTripId = newTripResult.rows[0].trip_id
+    } else {
+      newTripResult = await pool.query('INSERT INTO trips (trip_id) VALUES ($1) RETURNING trip_id', [trip_id])
+      newTripId = trip_id
+    }
+
+    // Insert schedule information into schedule table
+    await pool.query('INSERT INTO schedule (schedule_id, trip_id, departure_date, arrival_date) VALUES ($1, $2, $3, $4)', [schedule_id, newTripId, departure_date, arrival_date])
+    res.redirect('/trips')
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Error adding trip to database')
+  }
+})
+
+app.delete('/trips/:trip_id', async function (req, res) {
+  const trip_id = req.params.trip_id
+  try {
+    // Check if the schedule with the given trip_id exists in the database
+    const existingSchedule = await pool.query('SELECT * FROM schedule WHERE trip_id = $1', [trip_id])
+    if (existingSchedule.rows.length === 0) {
+      res.status(404).send('Schedule not found')
+      return
+    }
+
+    // Delete the schedule from the schedule table
+    await pool.query('DELETE FROM schedule WHERE trip_id = $1', [trip_id])
+
+    // Check if the trip is still being used by any other schedules
+    const schedulesWithTrip = await pool.query('SELECT * FROM schedule WHERE trip_id = $1', [trip_id])
+    if (schedulesWithTrip.rows.length === 0) {
+      // Delete the corresponding trip from the trips table
+      await pool.query('DELETE FROM trips WHERE trip_id = $1', [trip_id])
+    }
+
+    res.sendStatus(204)
+  } catch (err) {
+    console.error(err)
+    res.status(500).send('Error deleting schedule')
   }
 })
 

@@ -1,6 +1,8 @@
 // const { Pool } = require('pg')
 // const request = require('supertest')
 // const express = require('express')
+// const app = require('../../server.js')
+
 /*
 const pool = new Pool({
   user: 'postgres',
@@ -14,7 +16,6 @@ const pool = new Pool({
 })
 */
 
-// const app = express()
 // const { google } = require('googleapis')
 
 /*
@@ -25,6 +26,20 @@ const oauth2Client = new google.auth.OAuth2(
   'http://localhost:3000/oauthcallback'
 )
 */
+
+describe('GET /', function () {
+  it('responds with 200', async function () {
+    const response = await fetch('http://localhost:3000/')
+    expect(response.status).toBe(200)
+  })
+})
+
+describe('GET /about', function () {
+  it('responds with 200', async function () {
+    const response = await fetch('http://localhost:3000/about')
+    expect(response.status).toBe(200)
+  })
+})
 
 describe('GET /health', function () {
   it('responds with a status code between 200 and 399', async function () {
