@@ -1,3 +1,5 @@
+const { google } = require('googleapis')
+const calendar = google.calendar('v3')
 require('dotenv').config()
 const { Pool } = require('pg')
 const pool = new Pool({
@@ -12,13 +14,48 @@ const app = express()
 const path = require('path')
 const port = process.env.PORT || 3000
 
-const { google } = require('googleapis')
-
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
   'http://localhost:3000/oauthcallback'
 )
+
+oauth2Client.setCredentials({
+  access_token: process.env.ACCESS_TOKEN,
+  refresh_token: process.env.REFRESH_TOKEN
+})
+
+async function addTripToCalendar (tripId, departureDate, arrivalDate) {
+  try {
+    const eventStartTime = new Date(departureDate).toISOString()
+    const eventEndTime = new Date(arrivalDate).toISOString()
+
+    const event = {
+      summary: `Trip ${tripId}`,
+      start: {
+        dateTime: eventStartTime,
+        timeZone: 'America/Chicago'
+      },
+      end: {
+        dateTime: eventEndTime,
+        timeZone: 'America/Chicago'
+      },
+      reminders: {
+        useDefault: true
+      }
+    }
+
+    const calendarResponse = await calendar.events.insert({
+      auth: oauth2Client,
+      calendarId: 'df56892f6c27b1006ad8f5a7b418d7448a4ab0b31c2a100d55932fee14e9b706@group.calendar.google.com',
+      resource: event
+    })
+
+    console.log('Calendar event created:', calendarResponse.data.htmlLink)
+  } catch (err) {
+    console.error('Error adding trip to Google Calendar:', err)
+  }
+}
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
@@ -76,6 +113,8 @@ app.post('/trips/add', async function (req, res) {
 
     // Insert schedule information into schedule table
     await pool.query('INSERT INTO schedule (schedule_id, trip_id, departure_date, arrival_date) VALUES ($1, $2, $3, $4)', [schedule_id, newTripId, departure_date, arrival_date])
+    // Add the trip to Google Calendar
+    await addTripToCalendar(newTripId, departure_date, arrival_date)
     res.redirect('/trips')
   } catch (err) {
     console.error(err)

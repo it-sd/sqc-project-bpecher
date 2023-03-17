@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Calendar</title>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+      // Load the Google Calendar API client library
+      gapi.load('client', initClient);
+
+      function initClient() {
+        // Initialize the client with API key and necessary scopes
+        gapi.client.init({
+          apiKey: 'AIzaSyDD3b_XG6YTsiaxq6_1fPsoEBNkMRHJadA',
+          discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+          clientId: '477636651699-16dt2kcspo1o8475fba46o0ef7ditts6.apps.googleusercontent.com',
+          scope: 'https://www.googleapis.com/auth/calendar.readonly'
+        }).then(function() {
+          // Call the Google Calendar API to retrieve the events for the next 7 days
+          var now = new Date();
+          var end = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+          return gapi.client.calendar.events.list({
+            'calendarId': 'primary',
+            'timeMin': now.toISOString(),
+            'timeMax': end.toISOString(),
+            'showDeleted': false,
+            'singleEvents': true,
+            'orderBy': 'startTime'
+          });
+        }).then(function(response) {
+          var events = response.result.items;
+          var calendarDiv = document.getElementById('calendar');
+          for (var i = 0; i < events.length; i++) {
+            var event = events[i];
+            var when = event.start.dateTime;
+            if (!when) {
+              when = event.start.date;
+            }
+            var title = event.summary;
+            var eventDiv = document.createElement('div');
+            eventDiv.innerHTML = title + ' (' + when + ')';
+            calendarDiv.appendChild(eventDiv);
+          }
+        }, function(reason) {
+          console.error('Error: ' + reason.result.error.message);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>My Calendar</h1>
+    <div id="calendar"></div>
+  </body>
+</html>
