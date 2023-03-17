@@ -50,5 +50,9 @@
   <body>
     <h1>My Calendar</h1>
     <div id="calendar"></div>
+    <script>
+      // Pass the environment variables to the client-side code
+      window.process = { env: { API_KEY: '<your-api-key>', CLIENT_ID: '<your-client-id>' } };
+    </script>
   </body>
 </html>
