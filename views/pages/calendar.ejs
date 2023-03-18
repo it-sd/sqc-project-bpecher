@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Calendar</title>
+    <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
+    <script>
+      function init() {
+        gapi.load('auth2', function()
+        // Initialize the client with API key and necessary scopes
+        gapi.auth2.init({
+          apiKey: process.env.API_KEY,
+          discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"],
+          client_id: process.env.CLIENT_ID,
+          scope: 'https://www.googleapis.com/auth/calendar.readonly'
+        }).then(function() {
+          // Call the Google Calendar API to retrieve the events for the next 7 days
+          var now = new Date();
+          var end = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+          return gapi.auth2.calendar.events.list({
+            'calendarId': 'primary',
+            'timeMin': now.toISOString(),
+            'timeMax': end.toISOString(),
+            'showDeleted': false,
+            'singleEvents': true,
+            'orderBy': 'startTime'
+          });
+        }).then(function(response) {
+          var events = response.result.items;
+          var calendarDiv = document.getElementById('calendar');
+          for (var i = 0; i < events.length; i++) {
+            var event = events[i];
+            var when = event.start.dateTime;
+            if (!when) {
+              when = event.start.date;
+            }
+            var title = event.summary;
+            var eventDiv = document.createElement('div');
+            eventDiv.innerHTML = title + ' (' + when + ')';
+            calendarDiv.appendChild(eventDiv);
+          }
+        }, function(reason) {
+          console.error('Error: ' + reason.result.error.message);
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>My Calendar</h1>
+    <div id="calendar"></div>
+    <script>
+      // Pass the environment variables to the client-side code
+      window.process = { env: { API_KEY: '<your-api-key>', CLIENT_ID: '<your-client-id>' } };
+    </script>
+  </body>
+</html>
